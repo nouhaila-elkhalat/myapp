@@ -23,7 +23,6 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,19 +47,7 @@ class User extends Authenticatable
 
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class,'role_user', 'role_id', 'user_id');
-    }
 
-    public function isAdmin(): bool
-{
-    return $this->roles()->where('name', 'admin')->exists();
-}
 
-public function hasRole($roleName)
-{
-    return $this->roles->contains('name', $roleName);
-}
 
 }
