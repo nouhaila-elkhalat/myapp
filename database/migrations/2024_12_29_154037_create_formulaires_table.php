@@ -9,18 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('formulaires', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('prenom');
-            $table->string('objet');
-            $table->text('description');
-            $table->enum('gravite', ['Fiable', 'Moyen', 'Haut']);
-            $table->timestamps(); // created_at et updated_at
+            $table->string('first_name'); // Prénom
+            $table->string('last_name');  // Nom
+            $table->string('subject');    // Objet
+            $table->text('description');  // Description
+            $table->enum('severity', ['Fiable', 'Moyen', 'Haut']); // Gravité
+            $table->timestamps();  // Création et mise à jour
         });
     }
+
     /**
      * Reverse the migrations.
      */

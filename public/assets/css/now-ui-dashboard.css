@@ -3095,7 +3095,6 @@ Created using IcoMoon - icomoon.io
   display: inline-block;
   font: normal normal normal 14px/1 'Nucleo Outline';
   font-size: inherit;
-  speak: none;
   text-transform: none;
   /* Better Font Rendering */
   -webkit-font-smoothing: antialiased;
@@ -4441,7 +4440,6 @@ Created using IcoMoon - icomoon.io
 }
 
 .fixed-plugin .adjustments-line p {
-  float: left;
   display: inline-block;
   margin-bottom: 0;
   font-size: 1em;

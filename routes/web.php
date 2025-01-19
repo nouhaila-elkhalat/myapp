@@ -4,21 +4,23 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FormulaireController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
 
 // Public route
 Route::get('/', function () {
     return view('home');
 });
 
-// Authenticated dashboard route
+//dashboard route
 Route::get('/dashboard', function (){
     return view('dashboard');
 }) ->name('dashboard');
+Route::post('/dashboard', [FormulaireController::class, 'store'])->name('dashboard.store'); // Envoyer le formulaire
 
-Route::get('/form', [FormulaireController::class, 'create'])->name('form.index'); // Afficher le formulaire
-Route::post('/form', [FormulaireController::class, 'store'])->name('form.store'); // Soumettre le formulaire
+  //liste route
+  Route::resource('formulaires', FormulaireController::class);
 
-// Admin routes
+// Admin route
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });

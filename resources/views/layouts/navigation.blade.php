@@ -1,60 +1,99 @@
-<nav x-data="{ open: false, showForm: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
+<nav x-data="{ open: false, showForm: false }" class="bg-orange-500 border-b border-gray-100  fixed top-0 left-0 w-full z-50 shadow-md">
+            <!-- Primary Navigation Menu -->
+         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+           <div class="flex">
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('form.index')" class="text-gray-600 hover:text-gray-900 font-semibold">
-                        {{ __('Formulaire') }}
-                    </x-nav-link>
-
+                    <div class="inline-flex items-center px-1 pt-1 text-lg font-medium leading-5 text-gray-800 focus:outline-none hover:text-gray-600 transition duration-150 ease-in-out">
+                    <a href="#" id="openModal" >Formulaire</a>
                 </div>
             </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
             </div>
+                <!-- Votre fichier CSS de formulaire-->
+             <link rel="stylesheet" href="style/style.css">
+         <!-- Modal -->
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h1>Formulaire</h1>
+            <form id="customForm" method="POST" action="{{ route('dashboard.store') }}" >
+                @csrf
+                <div class="form-group">
+                    <label for="first_name">Prénom :</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Entrez votre prénom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Nom :</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Entrez votre nom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Objet :</label>
+                    <input type="text" id="subject" name="subject" placeholder="Entrez l'objet" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description :</label>
+                    <textarea id="description" name="description" placeholder="Entrez une description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="severity">Gravité :</label>
+                    <select id="severity" name="severity" required>
+                        <option value="" disabled selected>Choisissez une gravité</option>
+                        <option value="Fiable">Fiable</option>
+                        <option value="Moyen">Moyen</option>
+                        <option value="Haut">Haut</option>
+                    </select>
+                </div>
+
+                <button type="submit">Envoyer</button>
+            </form>
+
+            <div class="message success" id="successMessage">Formulaire soumis avec succès !</div>
+            <div class="message error" id="errorMessage">Une erreur s'est produite lors de la soumission !</div>
         </div>
     </div>
+            <!-- Votre fichier JavaScript de formulaire-->
+           <script src="style/style.js"></script>
+
+          <!-- Compte Utilisateur (Icône) et Notifications -->
+          <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <!-- Icône de notification -->
+            <div class="mr-4">
+                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    <i class="fas fa-bell fa-2x"></i>
+                </button>
+            </div>
+
+            <!-- Icône de compte utilisateur avec taille augmentée -->
+            <x-dropdown align="right" width="48">
+                <x-slot name="trigger">
+                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <!-- Icône de profil utilisateur avec taille 2x -->
+                        <i class="fas fa-user fa-2x"></i>
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-dropdown-link>
+                    <!-- Authentification -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-dropdown-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                      this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+            </x-dropdown>
+        </div>
     </div>
+</div>
 </nav>
