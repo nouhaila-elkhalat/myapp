@@ -59,8 +59,8 @@
     <!-- Hero Section -->
     <header class="custom-orange text-white text-center py-5">
         <div class="container">
-            <h1>Bienvenue sur Application de Gestion des Incidents</h1>
-            <p class="lead">Une solution simple et efficace pour gérer vos incidents</p>
+            <h1>Bienvenue</h1>
+            <p class="lead">L'application de gestion des incidents à l'aéroport Marrakech-Menara permet aux utilisateurs de signaler efficacement les incidents tout en garantissant un accès sécurisé. Pour utiliser l'application, l'utilisateur doit d'abord s'inscrire en créant un compte personnel et en saisissant ses informations essentielles en cliquant sur Register. S'il possède déjà un compte, il peut se connecter en saisissant son adresse e-mail et son mot de passe en cliquant sur Login. Une fois connecté, il peut signaler un incident en remplissant un formulaire contenant son nom, prénom, l'objectif du signalement, une description détaillée de l'incident et le niveau de gravité (faible, moyen ou élevé). Après soumission, l'application assure un suivi structuré des incidents signalés, facilitant ainsi leur gestion et leur résolution.</p>
             <a href="#" class="btn btn-light btn-lg">En savoir plus</a>
         </div>
     </header>
